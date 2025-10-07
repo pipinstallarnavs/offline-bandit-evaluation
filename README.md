@@ -1,12 +1,32 @@
-# Offline evaluation of recommendation policies
+![Offline Bandit Evaluation banner](assets/banner.svg)
 
-Contextual bandit experiment using real UCI optical-digit features and labels,
-with a disclosed logging policy. This is a recommendation-style benchmark built
-from a classification dataset, not real user click logs. It compares direct
-method, IPS, self-normalized IPS and doubly robust estimates against the fully
-observed test truth.
+# Offline Bandit Evaluation
+
+This project compares common off-policy estimators for contextual bandits under controlled ground truth.
+
+## Estimators
+
+- Direct method
+- Inverse propensity scoring
+- Self-normalized inverse propensity scoring
+- Doubly robust estimation
+
+UCI optical-digit features and labels provide reproducible contexts and outcomes. A disclosed stochastic logging policy creates partial feedback, while the fully observed labels allow each estimate to be checked against the true policy value.
+
+## Run
 
 ```bash
-../NAS/venv/bin/python run.py
-../NAS/venv/bin/python -m unittest -v
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python run.py
+python -m unittest -v
 ```
+
+## Evaluation
+
+The report compares estimator bias against fully observed test truth. The experiment is useful for studying propensity weighting and model misspecification without claiming that classification labels reproduce real recommendation traffic.
+
+## Scope
+
+This is a methodological benchmark. It does not use production click logs, delayed rewards, or non-stationary user behavior.
